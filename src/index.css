@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.App {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+}
+.Apps{
+    position: relative;
+    margin-top: 100px;
+    margin-left: 20px;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+.describ h2{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.describ h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.card img{
+    width: auto;
+    height: 90vh;
+}
+.start{
+    display: flex;
+}
+
+.pack{
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+.pack div{
+    display: flex;
+    gap: 10px;
+}
+
+.perso{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.perso select{
+    border: 1px solid blue;
+    padding: 4px ;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 300px;
+    margin-bottom: 10px;
+}
+.perso  input {
+    border: 1px solid #666;
+    border-radius: 5px;
+    width: 300px;
+}
+.perso p {
+    font-size: 14px;
+    color: #666;
+}
+.add{
+    display: flex;
+    gap: 10px;
+}
+.desrib {
+    margin: 10px 0;
+}
+.plus {
+    border: 1px solid #297dcc;
+    border-radius:  7px;
+}
+
+.btn {
+    background-color: #4c9eb8;
+    border-radius: 3px;
+    padding: 0 10px;
+}
+.bt{
+    padding: 0 15px;
+}
+.pag{
+    padding: 0 10px;
+    border-radius: 10px;
+    
+}
+
+@media screen and (max-width: 800px) {
+    .App{
+        display: flex;
+        flex-direction: column;
+    }
+    .Apps{
+        position: relative;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    .card img{
+        width: auto;
+        height: 50vh;
+    }
+}
+
+.chron {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.chron h2{
+    font-size: 34px;
+    font-weight: bold;
+}
+.chron div{
+    display: flex;
+    gap: 20px;
+    font-size: 24px;
+}
