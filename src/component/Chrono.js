@@ -2,60 +2,57 @@ import React, { useEffect, useState } from 'react'
 
 const Chrono = () => {
 
-    const [dates, setDates] = useState(new Date())
-    // const [time, setTime] = useState({hours: 0, minutes: 0, seconde: 0})
+    const [time, setTime] = useState({hours: 0, minutes: 0, seconds: 0})
     const [isActive, setIsActive] = useState(false);
-    
-    const now = new Date();
-    // const distance = dates - now;
-    
-    const hours = Math.floor((dates % (1000 * 60 * 60 * 24 )) / (1000 * 60 * 60) );
-    const minutes = Math.floor((dates % (1000 * 60 * 60 )) / (1000 * 60 ) );
-    const seconde = Math.floor((dates % (1000 * 60  )) / (1000 ) );
+    const [isPause, setIsPause] = useState(true)
+    const [intervalId , setIntervalId] = useState(null)
+    const [ispause, setPause] = useState(false)
+   
+   useEffect( ()=> {
+      let timer;
+      if(isActive && !isPause){
+         timer = setInterval( ()=> {
+            setTime(prevTime => {
+               const updateSeconds = prevTime.seconds + 1;
+               const updateMinutes = prevTime.minutes + Math.floor(updateSeconds / 60);
+               const updateHours = prevTime.hours + Math.floor(updateMinutes / 60);
 
-    console.log(minutes, hours, seconde)
-    
+               return {
+                  hours : updateHours % 24,
+                  minutes : updateMinutes % 60,
+                  seconds : updateSeconds % 60,
+               }
+            })
+         }, 10.5)
+         setIntervalId(timer)
+      } else{
+         clearInterval(intervalId)
+      }
+      return ()=> clearInterval(timer);      
+   },[isActive, isPause])
+   
+   const handleClick = ()=> {
+      
+      setIsActive(true)
+      setIsPause(!isPause)
+     
+   }
 
-    // useEffect( ()=> {
-    //     let interval = null;
-    //     if(isActive) {
-    //         interval = setInterval( ()=> {
-    //             const now = new Date();
-    //             const distance = dates - now;
-                
-    //             const hours = Math.floor((distance % (1000 * 60 * 60 * 24 )) / (1000 * 60 * 60) );
-    //             const minutes = Math.floor((distance % (1000 * 60 * 60 )) / (1000 * 60 ) );
-    //             const seconde = Math.floor((distance % (1000 * 60  )) / (1000 ) );
+   const handleReset = ()=> {
+      setIsActive(false)
+      setIsPause(true)
+      setTime({ hours:0, minutes: 0 ,seconds: 0})
+      clearInterval(intervalId)
+   }
 
-    //             setTime({ hours, minutes, seconde});
-
-    //             if(distance < 0 ) {
-    //                 clearInterval(interval)
-    //                 setIsActive(false);
-    //                 setTime({hours: 0, minutes: 0, seconde: 0})
-    //             }
-                               
-    //         }, 100)
-    //     }
-    //      clearInterval(interval);
-        
-    // },[isActive, dates])
-    
-    
-    
-     const handleClick = ()=> {
-        setIsActive(t => t = true)
-     }
-  
-
-    
+    console.log(time.seconds)
 
   return (
     <div className='chron'>
-      <h2>{hours} : {minutes} . {seconde}</h2>
+      <h2>{`${time.hours.toString().padStart(2, 0)} : ${time.minutes.toString().padStart(2, 0)} : ${time.seconds.toString().padStart(2, 0)}`}</h2>
      <div>
-        <button>Reset</button>
-        <button onClick={handleClick}>⏯▶</button>
+        <button className='reset' onClick={handleReset}>Reset</button>
+        <button onClick={()=>handleClick()}>{ isActive ? 'Pause' : 'Play'}</button>
      </div>
     </div>
   )

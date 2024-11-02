@@ -4,6 +4,7 @@ import Pack from './component/Pack';
 import Perso from './component/Personnaliser';
 import Description from './component/Description';
 import Chrono from './component/Chrono';
+import Reducer from './Reducer/Reducer';
 
 const card = 22500
 
@@ -23,7 +24,8 @@ function App() {
         <Pack  onSetcont={setControleur} controle={controleur} price={controleur} />
         <Perso  onSetcont={setControleur} price={controleur}/>
       </div> */}
-      <Chrono/>
+      {/* <Chrono/> */}
+      <Reducer/>
     </div>
   );
 }
